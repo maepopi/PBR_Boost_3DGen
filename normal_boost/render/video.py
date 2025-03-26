@@ -3,14 +3,30 @@
 """
 import imageio
 import numpy as np
+import os
 
 class Video():
     def __init__(self, path, name='video_log.mp4', mode='I', fps=30, codec='libx264', bitrate='16M') -> None:
         
         if path[-1] != "/":
             path += "/"
+        
+        full_path = path + name
+        ext = os.path.splitext(full_path)[-1].lower()
+
+        # Accepted video formats
+        video_exts = ['.mp4', '.avi', '.mov', '.gif']
+        
+        if ext not in video_exts:
+            full_path += ".mp4"
             
-        self.writer = imageio.get_writer(path+name, mode=mode, fps=fps, codec=codec, bitrate=bitrate)
+        self.writer = imageio.get_writer(
+            full_path,
+            mode=mode,
+            fps=fps,
+            codec=codec,
+            bitrate=bitrate
+        )
     
     def ready_image(self, image, write_video=True):
         # assuming channels last - as renderer returns it

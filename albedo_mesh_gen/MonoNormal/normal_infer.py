@@ -50,7 +50,7 @@ if __name__ == '__main__':
     ckpts_path = os.path.join(current_dir, "../../ckpts/MonoNormal")
 
     single_inference(
-        src_path='xxx.png',
-        dst_name='yyy',
+        src_path='/home/jupyter/PBR_Boost_3DGen/input_mesh/canap_image.png',
+        dst_name='/home/jupyter/PBR_Boost_3DGen/input_mesh/canap_out_normal.png',
         checkpoint=ckpts_path,
     )    

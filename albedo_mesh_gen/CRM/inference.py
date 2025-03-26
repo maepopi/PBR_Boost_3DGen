@@ -7,6 +7,7 @@ import tempfile
 from mesh import Mesh
 import zipfile
 import os
+import getpass
 def generate3d(model, rgb, ccm, device):
 
     color_tri = torch.from_numpy(rgb)/255
@@ -70,7 +71,11 @@ def generate3d(model, rgb, ccm, device):
 
     start_time = time.time()
     with torch.no_grad():
-        tempfile.tempdir = '/cpfs01/user/wangyitong/ai_demo/CRM/.tmp'
+        username = getpass.getuser()
+        fallback_tmp = f"/home/{username}/.cache/pbrboost_tmp"
+        os.makedirs(fallback_tmp, exist_ok=True)
+        tempfile.tempdir = fallback_tmp
+        
         os.makedirs(tempfile.tempdir, exist_ok=True)
         mesh_path_obj = tempfile.NamedTemporaryFile(suffix=f"", delete=False).name
         model.export_mesh_wt_uv(glctx, data_config, mesh_path_obj, "", device, res=(1024,1024), tri_fea_2=triplane_feature2)

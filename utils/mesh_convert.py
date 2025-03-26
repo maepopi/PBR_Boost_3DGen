@@ -182,8 +182,8 @@ def mesh_preprocess(src_path, dst_path, model_name):
 
 
 if __name__ == '__main__':
-    src_path = 'path/to/load/mesh.obj'
-    dst_path = 'path/to/save'
+    src_path = '/home/jupyter/PBR_Boost_3DGen/input_mesh/to_convert/tmpj15ela5r.obj'
+    dst_path = '/home/jupyter/PBR_Boost_3DGen/output_mesh/converted'
     model_name = 'crm' # 'instantmesh', 'wonder3d', 'triposr', 'sketchfab'
 
     mesh_preprocess(

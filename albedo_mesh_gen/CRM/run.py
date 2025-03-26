@@ -17,6 +17,10 @@ import PIL
 import rembg
 import os
 from pipelines import TwoStagePipeline
+import tempfile
+
+tempfile.tempdir = "/tmp"
+
 
 rembg_session = rembg.new_session()
 

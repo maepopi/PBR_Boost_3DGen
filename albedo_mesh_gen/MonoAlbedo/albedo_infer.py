@@ -41,7 +41,7 @@ if __name__ == '__main__':
     ckpts_path = os.path.join(current_dir, "../../ckpts/MonoAlbedo")
     
     single_inference(
-        src_path='xxx.png',
-        dst_path='yyy.png',
+        src_path='/home/jupyter/PBR_Boost_3DGen/input_mesh/canap_image.png',
+        dst_path='/home/jupyter/PBR_Boost_3DGen/output_mesh/canap_out.png',
         checkpoint=ckpts_path,
     )
