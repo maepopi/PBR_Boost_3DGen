@@ -15,13 +15,13 @@ Tested GPUs: NVIDIA A100
 
 This fork was made because I struggled to install the original repo on Linux. Here's what I needed to do to make it work.
 
-**Create your conda environment**
+**🐍Create your conda environment**
 ```
 conda create -n pbrboost python=3.9 -y
 conda activate pbrboost
 ```
 
-**Install CUDA 11.6 Toolkit and switch to it using update-alternatives**
+**⚙️ Install CUDA 11.6 Toolkit and switch to it using update-alternatives**
 
 ```
 wget https://developer.download.nvidia.com/compute/cuda/11.6.0/local_installers/cuda_11.6.0_510.39.01_linux.run
@@ -32,25 +32,47 @@ sudo update-alternatives --install /usr/local/cuda cuda /usr/local/cuda-11.6 116
 sudo update-alternatives --config cuda
 ```
 
-**Make sure your nvcc is now pointing to 11.6**
+If CUDA 11.8 won't install due to a gcc version check failure:
+```
+sudo apt update
+sudo apt install gcc-11 g++-11 -y
+sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-11 110
+sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-11 110
+```
+Then choose ```gcc 11``` and ```g++ 11``` with
+```
+sudo update-alternatives --config gcc
+sudo update-alternatives --config g++
+```
+When you type :
+```
+gcc --version
+g++ --version
+```
+Both should output ```11.x```.
 
+
+**🔎 Make sure your ```nvcc``` is now pointing to 11.6**
+
+Once CUDA 11.8 is installed (with or without having to go through the gcc fix), check that your CUDA points to the right version.
 ```
 nvcc --version
 ```
+If it outputs ```11.8```, you can go on!
 
-**Install Pytorch(cu116 build) from Pytorch official index**
+**🔥 Install Pytorch(cu116 build) from Pytorch official index**
 
 ```
 pip install torch==1.13.1+cu116 torchvision==0.14.1+cu116 torchaudio==0.13.1 --index-url https://download.pytorch.org/whl/cu116
 ```
 
-**Clone the repo and cd into it**
+**📦 Clone the repo**
 ```
 git clone https://github.com/maepopi/PBR_Boost_3DGen
 cd PBR_BOOST_3DGen
 ```
 
-**Install dependencies**
+**🛠️ Install dependencies**
 ```
 conda install -c conda-forge ninja
 pip install -r requirements.txt
