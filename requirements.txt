@@ -51,7 +51,7 @@ decorator==5.1.1
 defusedxml==0.7.1
 Deprecated==1.2.18
 deprecation==2.1.0
-diffusers==0.25.0
+diffusers==0.27.2
 dill==0.3.7
 distributed==2024.5.1
 distributed-ucxx-cu11==0.38.0

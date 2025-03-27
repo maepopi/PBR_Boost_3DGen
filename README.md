@@ -10,11 +10,54 @@ Official implementation for _Boosting 3D Object Generation through PBR Materials
 System requirements: Ubuntu 18.04
 
 Tested GPUs: NVIDIA A100
-```bash
-conda create -n pbrboost python=3.9
-conda install pytorch==1.13.1 torchvision==0.14.1 torchaudio==0.13.1 pytorch-cuda=11.6 -c pytorch -c nvidia
+
+--
+
+This fork was made because I struggled to install the original repo on Linux. Here's what I needed to do to make it work.
+
+**Create your conda environment**
+```
+conda create -n pbrboost python=3.9 -y
+conda activate pbrboost
+```
+
+**Install CUDA 11.6 Toolkit and switch to it using update-alternatives**
+
+```
+wget https://developer.download.nvidia.com/compute/cuda/11.6.0/local_installers/cuda_11.6.0_510.39.01_linux.run
+sudo sh cuda_11.6.0_510.39.01_linux.run
+sudo update-alternatives --install /usr/local/cuda cuda /usr/local/cuda-11.6 116
+
+# After typing this, choose the right CUDA by typing its index
+sudo update-alternatives --config cuda
+```
+
+**Make sure your nvcc is now pointing to 11.6**
+
+```
+nvcc --version
+```
+
+**Install Pytorch(cu116 build) from Pytorch official index**
+
+```
+pip install torch==1.13.1+cu116 torchvision==0.14.1+cu116 torchaudio==0.13.1 --index-url https://download.pytorch.org/whl/cu116
+```
+
+**Clone the repo and cd into it**
+```
+git clone https://github.com/maepopi/PBR_Boost_3DGen
+cd PBR_BOOST_3DGen
+```
+
+**Install dependencies**
+```
+conda install -c conda-forge ninja
 pip install -r requirements.txt
 ```
+
+Normally that should get you covered!
+
 
 ### Step 2 - Image-to-3D (Optional)
 We recommend you to install Image-to-3D methods according to their official repositories. We have tested [CRM](https://github.com/thu-ml/CRM), [InstantMesh](https://github.com/TencentARC/InstantMesh), [Wonder3D](https://github.com/xxlong0/Wonder3D), [Era3D](https://github.com/pengHTYX/Era3D), and [TripoSR](https://github.com/VAST-AI-Research/TripoSR).
